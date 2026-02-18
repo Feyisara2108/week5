@@ -16,27 +16,8 @@ interface IERC20 {
 abstract contract ERC20 is IERC20 {
     uint256 public totalSupply; //total coin available mint = +ve, burn + burn
 
-    // {address1 : balance1, address2 : balance2}
-    // const balanceOf = {
-    //     address: balance,
-    //     address: balance,
-    //     address: balance,
-    //     address: balance,
-    //     address: balance,
-    //     address: balance,
-    //     address: balance,
-
-    // }
     mapping(address _owner => uint256 balance) public balanceOf;
 
-    // {addressOwner:{addressSpender : balance}}
-
-    // const allowance = {
-    //     addressOwner:{
-    //         addressSpender: balance
-    //     }
-    // }
-    // mapping(address => mapping(address => uint256)) allowance;
     mapping(address _owner => mapping(address _spender => uint256 _amount)) allowance;
 
     string public name = "ERC20";
@@ -60,12 +41,6 @@ abstract contract ERC20 is IERC20 {
 
         return true;
     }
-
-    // const allowance = {
-    //     addressOwner:{
-    //         addressSpender: balance
-    //     }
-    // }
 
     function transferFrom(address sender, address recipient, uint256 _amount) external returns (bool) {
         allowance[sender][msg.sender] = allowance[sender][msg.sender] - _amount;
